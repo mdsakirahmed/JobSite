@@ -1,73 +1,219 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="en">
+<!-- This system developed by DataTech BD ltd. Phone: 01304734623-25 | info@datatechbd.com | 08-09-2020-->
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Login</title>
+    <!--favicon-->
+    <link rel="icon" href="{{ asset('assets/images/favicon.ico') }}" type="image/x-icon">
+    <!-- Bootstrap core CSS-->
+    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet"/>
+    <!-- animate CSS-->
+    <link href="{{ asset('assets/css/animate.css') }}" rel="stylesheet" type="text/css"/>
+    <!-- Icons CSS-->
+    <link href="{{ asset('assets/css/icons.css') }}" rel="stylesheet" type="text/css"/>
+    <!-- Custom Style-->
+    <link href="{{ asset('assets/css/app-style.css') }}" rel="stylesheet"/>
+    <!--SweetAlert 2-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <!--====== AJAX ======-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+</head>
+
+<body>
+<!-- Start wrapper-->
+<div id="wrapper">
+    <div class="card-authentication2 mx-auto my-5" >
+        <div class="card-group shadow-lg">
+
+
+            <div class="card mb-0">
                 <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
+                    <div class="card-content p-3">
+                        <div class="card-title text-uppercase text-center pb-3"><b>Sign In</b></div>
+                        @include('includes.message')
+                        <form method="POST" action="{{ route('login') }}">
+                            @csrf
+                            <div class="form-group">
+                                <div class="position-relative has-icon-left">
+                                    <label for="email" class="sr-only">Email</label>
+                                    <input type="tel" id="email" name="email" class="form-control" placeholder="Email address">
+                                    <div class="form-control-position">
+                                        <i class="icon-user"></i>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
+                            <div class="form-group">
+                                <div class="position-relative has-icon-left">
+                                    <label for="password" class="sr-only">Password</label>
+                                    <input type="password" id="password" name="password" class="form-control" placeholder="Password">
+                                    <div class="form-control-position">
+                                        <i class="icon-lock"></i>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </form>
+
+                            <button type="submit" id="" class="btn btn-primary shadow-primary btn-block waves-effect waves-light">Sign In</button>
+                            <div class="text-center pt-3">
+                                <hr>
+                                <div class="form-row mr-0 ml-0">
+                                    <div class="form-group col-6 text-left">
+                                        <a href="#" class="applicant-register-btn">Register as applicant</a>
+                                    </div>
+                                    <div class="form-group col-6 text-right">
+                                        <a href="#" class="company-register-btn">Register as company</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!--Start Back To Top Button-->
+    <a href="javaScript:void();" class="back-to-top"><i class="fa fa-angle-double-up"></i> </a>
+    <!--End Back To Top Button-->
+</div><!--wrapper-->
+
+
+<!-- Modal -->
+<div class="modal fade" id="modal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true" style="background: linear-gradient(to bottom, #33ccff 0%, #ff99cc 100%);">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card-content p-3">
+                    <div class="card-title text-uppercase text-center pb-3"><b>Create Account</b></div>
+                    @include('includes.message')
+                    <form method="" action="#">
+                        <div class="form-group">
+                            <div class="position-relative has-icon-left">
+                                <input type="text" id="first-name" name="first-name" class="form-control" placeholder="First name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="position-relative has-icon-left">
+                                <input type="text" id="last-name" name="last-name" class="form-control" placeholder="Last name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="position-relative has-icon-left">
+                                <input type="text" id="business-name" name="business-name" class="form-control" placeholder="Business name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="position-relative has-icon-left">
+                                <input type="email" id="email" name="email" class="form-control" placeholder="Email address">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="position-relative has-icon-left">
+                                <input type="password" id="password" name="password" class="form-control" placeholder="Password">
+                            </div>
+                        </div>
+
+                        <button type="submit" id="" class="btn btn-primary shadow-primary btn-block waves-effect waves-light">Sign Up</button>
+                        <div class="text-center pt-3">
+                            <hr>
+                            <div class="form-row mr-0 ml-0">
+                                <div class="form-group col-6 text-left">
+                                    <a href="#" class="applicant-register-btn">Register as applicant</a>
+                                </div>
+                                <div class="form-group col-6 text-right">
+                                    <a href="#" class="company-register-btn">Register as company</a>
+                                </div>
+                            </div>
+                            <p class="text-muted">Already have an account? <a href="#" data-dismiss="modal"> Sign In</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Understood</button>
+            </div>
+        </div>
+    </div>
 </div>
-@endsection
+<!-- Bootstrap core JavaScript-->
+<script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+<script src="{{ asset('assets/js/popper.min.js') }}"></script>
+<script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>>
+<script>
+    $(document).ready(function() {
+        //Show applicant register modal
+        $('.applicant-register-btn').click(function (){
+            //alert('Working')
+            $('#modal').modal('show');
+            $('#business-name').hide();
+            $('.modal-title').html('Register as applicant');
+        });
+        //Show company register modal
+        $('.company-register-btn').click(function (){
+            //alert('Working')
+            $('#modal').modal('show');
+            $('#business-name').show();
+            $('.modal-title').html('Register as company');
+        });
+        //Submit new category
+        $('#dd').click(function(){
+            var formData = new FormData();
+            formData.append('phone', $('#phone').val())
+            formData.append('password', $('#password').val())
+            $.ajax({
+                method: 'POST',
+                url: "{{ route('login') }}",
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Successfully login',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    setTimeout(function() {
+                        location.reload();
+                    }, 800);//
+                },
+                error: function (xhr) {
+                    var errorMessage = '<div class="card bg-danger">\n' +
+                        '                        <div class="card-body text-center p-5">\n' +
+                        '                            <span class="text-white">';
+                    $.each(xhr.responseJSON.errors, function(key,value) {
+                        errorMessage +=(''+value+'<br>');
+                    });
+                    errorMessage +='</span>\n' +
+                        '                        </div>\n' +
+                        '                    </div>';
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        footer: errorMessage
+                    })
+                },
+            })
+        });
+    });
+</script>
+</body>
+
+<!-- This system developed by DataTech BD ltd. Phone: 01304734623-25 | info@datatechbd.com | 08-09-2020-->
+</html>

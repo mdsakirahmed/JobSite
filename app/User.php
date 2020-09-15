@@ -41,4 +41,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    //Skill
+    public function skill(){
+        return $this->hasMany(Skill::class,'applicant_id','id');
+    }
 }

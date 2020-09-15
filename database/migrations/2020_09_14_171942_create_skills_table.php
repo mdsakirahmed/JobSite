@@ -15,6 +15,8 @@ class CreateSkillsTable extends Migration
     {
         Schema::create('skills', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('applicant_id');
+            $table->string('name');
             $table->timestamps();
         });
     }
