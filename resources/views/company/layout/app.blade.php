@@ -23,8 +23,6 @@
     <link href="{{ asset('assets/css/sidebar-menu.css') }}" rel="stylesheet"/>
     <!-- Custom Style-->
     <link href="{{ asset('assets/css/app-style.css') }}" rel="stylesheet"/>
-    <!-- Text editor-->
-    <link href="{{ asset('assets/plugins/summernote/dist/summernote-bs4.css') }}" rel="stylesheet"/>
     <!--SweetAlert 2-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <!--====== AJAX ======-->

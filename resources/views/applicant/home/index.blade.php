@@ -20,9 +20,10 @@
     <!-- Blog Page Section -->
     <section class="blog-page-section">
         <div class="auto-container">
-            <div class="row clearfix">
+            <div class="row clearfix jobs">
 
-                <!-- News Block -->
+                <!-- Jobs -->
+                @foreach($jobs as $job)
                 <div class="news-block-two col-lg-4 col-md-6 col-sm-12">
                     <div class="inner-box">
                         <div class="image">
@@ -30,33 +31,95 @@
                             <br>
                         </div>
                         <div class="lower-content">
-                            <div class="category">Apply Now</div>
-                            <h4><a href="blog-single.html">Job Title</a></h4>
-                            <div class="text">Description The basic premise of search engine reputation management in to use the greate work</div>
+                            <div class="category btn apply-btn">
+                                @if(auth()->user()->checkApplication($job->id))
+                                Applied at &nbsp; {{auth()->user()->checkApplication($job->id)->created_at->format('d/m/Y - h:i A')}}
+                                @else Apply Now
+                                @endif
+                            </div>
+                            <h4><a href="#"> {{ Illuminate\Support\Str::limit($job->title, 20) }} </a></h4>
+                            <div class="text"> {!! Illuminate\Support\Str::limit($job->description, 50) !!} </div>
                             <div class="lower-box">
                                 <div class="clearfix">
-                                    <div class="pull-left">
-                                        <!-- Author Box -->
-                                        <div class="author-box">
-                                            <div class="box-inner">
-                                                <div class="author-image">
-                                                    <img src="images/resource/news-author-1.jpg" alt="" >
-                                                </div>
-                                                Villal Pando, <span>November 21, 2019</span>
-                                            </div>
-                                        </div>
+                                    <div class="text-warning">
+                                         Job posted at: {{ $job->created_at->format('d/m/Y - h:i A') }}
                                     </div>
-                                    <div class="pull-right">
-                                        <a href="blog-single.html" class="share"><span class="fa fa-share-alt"></span></a>
+                                    <hr>
+                                    <div class="text-info">
+                                        Company:  <span class="text-secondary text-right">{{ $job->company->business_name }}</span>
+                                    </div>
+                                    <div class="text-info">
+                                        Country:  <span class="text-secondary text-right">{{ $job->country }}</span>
+                                    </div>
+                                    <div class="text-info">
+                                        Location:  <span class="text-secondary text-right">{{ $job->location }}</span>
+                                    </div>
+                                    <div class="text-info">
+                                        Salary:  <span class="text-secondary text-right">{{ $job->salary }}</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                @endforeach
+
+
             </div>
         </div>
     </section>
     <!-- End Blog Section -->
+    <script>
+        //Add Image
+        $('.apply-btn').click(function (){
+            $.ajax({
+                method: 'get',
+                url: "{{ route('applicant.profile.index') }}",
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    if (data.resume){
+                        //working
+                    }else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Resume...',
+                            text: 'Please upload your resume!',
+                            footer: ''
+                        })
+                        $('.job-title').hide();
+                        $('.job-detail').hide();
+                        $('.modal').modal('show');
+                        $('.user-title').show();
+                        $('.user-detail').hide();
+                        $('.add-skill-area').show();
+                        $('.editable-area').show();
+                        getData();
+                    }
+                },
+            })
+        });
 
+        getJobs();
+        //get all jobs
+        function getJobs(){
+            console.log('getJobs')
+            $.ajax({
+                method: 'get',
+                url: "{{ route('applicant.home.index') }}",
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                processData: false,
+                contentType: false,
+
+                success: function (data) {
+                    var jobs='';
+                    data.forEach(function(skill){
+                        jobs += '<span class="badge badge-pill badge-primary">'+ skill.name +'</span> &nbsp;';
+                    })
+                    $(".skills").html(jobs)
+                },
+            })
+        }
+    </script>
 @endsection

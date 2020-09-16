@@ -50,6 +50,18 @@ class User extends Authenticatable
 
     //Job
     public function jobs(){
-        return $this->hasMany(Job::class,'company_id','id');
+        return $this->hasMany(Job::class,'company_id','id')->orderBy('id', 'desc');
+    }
+
+    //checkApplication
+    public function checkApplication($id){
+        if (ApplicantHasApply::where('applicant_id', $this->id)->where('job_id', $id)->exists()) {
+            return ApplicantHasApply::where('applicant_id', $this->id)->where('job_id', $id)->first();
+        }
+    }
+
+    //Application
+    public function application($id){
+        return $this->hasMany(ApplicantHasApply::class,'applicant_id','id')->orderBy('id', 'desc');
     }
 }

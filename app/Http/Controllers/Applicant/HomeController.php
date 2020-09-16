@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Applicant;
 
 use App\Http\Controllers\Controller;
+use App\Job;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -14,7 +15,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('applicant.home.index');
+        $jobs = Job::orderBy('id', 'desc')->get();
+        return view('applicant.home.index', compact('jobs'));
     }
 
     /**
@@ -24,7 +26,7 @@ class HomeController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**

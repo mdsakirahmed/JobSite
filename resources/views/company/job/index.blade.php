@@ -20,21 +20,23 @@
                 </div>
                 <div class="col-sm-3">
                     <div class="btn-group float-sm-right">
-                            <button type="button" class="btn btn-outline-primary waves-effect waves-light"><i class="fa fa-plus-circle mr-1"></i> Post a new job</button>
+                            <a href="{{ route('company.job.create') }}" class="btn btn-outline-primary waves-effect waves-light"><i class="fa fa-plus-circle mr-1"></i> Post a new job</a>
                     </div>
                 </div>
             </div>
             <!--End Breadcrumb-->
             <!--Start Staff Content-->
-            <div class="col-lg-12">
+            <div class="row col-lg-12">
                 @foreach(auth()->user()->jobs as $job)
                     <div class="col-lg-6">
                         <div class="card">
-                            <div class="card-header text-uppercase">Blockquotes with left alighned</div>
+                            <div class="card-header text-uppercase">{{ $job->title }}</div>
                             <div class="card-body">
                                 <blockquote class="blockquote">
-                                    <p>For 50 years, WWF has been protecting the future of nature. The world's leading conservation organization, WWF works in 100 countries and is supported by 1.2 million members in the United States and close to 5 million globally.</p>
-                                    <footer class="blockquote-footer">From WWF's website</footer>
+                                    <p>{!! $job->description !!}</p>
+                                    <footer class="blockquote-footer">{{ $job->created_at->format('d/m/Y - h:i A') }}</footer>
+                                    <footer class="blockquote-footer">{{ $job->location }} | {{ $job->country }}</footer>
+                                    <footer class="blockquote-footer info-outer"><b>{{ $job->salary }}</b></footer>
                                 </blockquote>
                             </div>
                         </div>

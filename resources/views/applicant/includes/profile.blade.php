@@ -289,7 +289,6 @@
                     }else {
                         $('.resume-link').hide();
                     }
-
                 },
             })
         }

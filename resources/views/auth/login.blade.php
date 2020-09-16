@@ -172,7 +172,7 @@
             $('.modal-title').html('Register as company');
         });
 
-        //Submit new category
+        //Submit registration
         $('#register').click(function(){
             var formData = new FormData();
             formData.append('type', $('#type').val())
