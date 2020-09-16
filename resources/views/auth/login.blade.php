@@ -44,7 +44,7 @@
                             <div class="form-group">
                                 <div class="position-relative has-icon-left">
                                     <label for="email" class="sr-only">Email</label>
-                                    <input type="tel" id="email" name="email" class="form-control" placeholder="Email address">
+                                    <input type="tel" id="userEmail" name="email" class="form-control" placeholder="Email address">
                                     <div class="form-control-position">
                                         <i class="icon-user"></i>
                                     </div>
@@ -53,7 +53,7 @@
                             <div class="form-group">
                                 <div class="position-relative has-icon-left">
                                     <label for="password" class="sr-only">Password</label>
-                                    <input type="password" id="password" name="password" class="form-control" placeholder="Password">
+                                    <input type="password" id="userPassword" name="password" class="form-control" placeholder="Password">
                                     <div class="form-control-position">
                                         <i class="icon-lock"></i>
                                     </div>
@@ -98,26 +98,26 @@
             <div class="modal-body">
                 <div class="card-content p-3">
                     <div class="card-title text-uppercase text-center pb-3"><b>Create Account</b></div>
-                    @include('includes.message')
                     <form method="" action="#">
+                        <input type="hidden" id="type">
                         <div class="form-group">
                             <div class="position-relative has-icon-left">
-                                <input type="text" id="first-name" name="first-name" class="form-control" placeholder="First name">
+                                <input type="text" id="business_name" name="business-name" class="form-control" placeholder="Business name">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="position-relative has-icon-left">
-                                <input type="text" id="last-name" name="last-name" class="form-control" placeholder="Last name">
+                                <input type="text" id="first_name" name="first-name" class="form-control" placeholder="First name">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="position-relative has-icon-left">
-                                <input type="text" id="business-name" name="business-name" class="form-control" placeholder="Business name">
+                                <input type="text" id="last_name" name="last-name" class="form-control" placeholder="Last name">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="position-relative has-icon-left">
-                                <input type="email" id="email" name="email" class="form-control" placeholder="Email address">
+                                <input type="email" id="email_address" name="email" class="form-control" placeholder="Email address">
                             </div>
                         </div>
                         <div class="form-group">
@@ -126,7 +126,8 @@
                             </div>
                         </div>
 
-                        <button type="submit" id="" class="btn btn-primary shadow-primary btn-block waves-effect waves-light">Sign Up</button>
+                        <button type="button" id="register" class="btn btn-primary shadow-primary btn-block waves-effect waves-light">Sign Up</button>
+
                         <div class="text-center pt-3">
                             <hr>
                             <div class="form-row mr-0 ml-0">
@@ -144,7 +145,6 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Understood</button>
             </div>
         </div>
     </div>
@@ -159,24 +159,32 @@
         $('.applicant-register-btn').click(function (){
             //alert('Working')
             $('#modal').modal('show');
-            $('#business-name').hide();
+            $('#business_name').hide();
+            $('#type').val('0');
             $('.modal-title').html('Register as applicant');
         });
         //Show company register modal
         $('.company-register-btn').click(function (){
             //alert('Working')
             $('#modal').modal('show');
-            $('#business-name').show();
+            $('#business_name').show();
+            $('#type').val('1');
             $('.modal-title').html('Register as company');
         });
+
         //Submit new category
-        $('#dd').click(function(){
+        $('#register').click(function(){
             var formData = new FormData();
-            formData.append('phone', $('#phone').val())
+            formData.append('type', $('#type').val())
+            formData.append('business_name', $('#business_name').val())
+            formData.append('first_name', $('#first_name').val())
+            formData.append('last_name', $('#last_name').val())
+            formData.append('email_address', $('#email_address').val())
             formData.append('password', $('#password').val())
+
             $.ajax({
                 method: 'POST',
-                url: "{{ route('login') }}",
+                url: "{{ route('registration') }}",
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 data: formData,
                 processData: false,

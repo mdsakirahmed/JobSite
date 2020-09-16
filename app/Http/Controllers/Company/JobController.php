@@ -1,27 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\Applicant;
+namespace App\Http\Controllers\Company;
 
 use App\Http\Controllers\Controller;
-use App\Skill;
-use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class SkillController extends Controller
+class JobController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        if($request->ajax()){
-            return auth()->user()->skill;
-        }else{
-            return redirect()->back();
-        }
+        return view('company.job.index');
     }
 
     /**
@@ -31,7 +24,7 @@ class SkillController extends Controller
      */
     public function create()
     {
-        //
+        return view('company.job.create');
     }
 
     /**
@@ -42,18 +35,7 @@ class SkillController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'skill' => 'required',
-        ]);
-
-        //Database
-        $skill = new Skill();
-
-        $skill->applicant_id = Auth::user()->id;
-        $skill->name         = $request->input('skill');
-        $skill->save();
-
-        return $skill;
+        //
     }
 
     /**

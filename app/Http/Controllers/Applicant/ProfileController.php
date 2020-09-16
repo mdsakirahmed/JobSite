@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Applicant;
 
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
@@ -12,9 +13,13 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if($request->ajax()){
+            return auth()->user();
+        }else{
+            return redirect()->back();
+        }
     }
 
     /**
@@ -35,7 +40,34 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (!$request->file('image') && !$request->file('resume')){
+            return response()->json([
+                'type' => 'warning',
+                'message' => 'Empty input field',
+            ]);
+        }
+        if ($request->file('image')) {
+            request()->validate([
+                'image'  => 'image',
+            ]);
+            $image = $request->file('image');
+            $destinationPath = public_path(). '/uploads/images/';
+            $imageName = 'image-'.auth()->user()->id.'-'.auth()->user()->first_name.'-'.$image->getClientOriginalName();
+            $request->file('image')->move($destinationPath, $imageName);
+            auth()->user()->image = $imageName;
+        }
+
+        if ($request->file('resume')) {
+            request()->validate([
+                'resume'  => 'mimes:doc,docx,pdf,max:5000',
+            ]);
+            $resume = $request->file('resume');
+            $destinationPath = public_path(). '/uploads/resumes/';
+            $resumeName = 'resume-'.auth()->user()->id.'-'.auth()->user()->first_name.'-'.$resume->getClientOriginalName();
+            $request->file('resume')->move($destinationPath, $resumeName);
+            auth()->user()->resume = $resumeName;
+        }
+        auth()->user()->save();
     }
 
     /**

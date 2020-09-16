@@ -8,7 +8,7 @@
   <meta name="description" content=""/>
   <meta name="author" content=""/>
   <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@stack('title') | {{ $setting->name }}</title>
+    <title>@stack('title') | {{ 'jobSite' }}</title>
   <!--favicon-->
   <link rel="icon" href="{{ asset('assets/images/favicon.ico') }}" type="image/x-icon">
     <!-- simplebar CSS-->
@@ -23,6 +23,8 @@
     <link href="{{ asset('assets/css/sidebar-menu.css') }}" rel="stylesheet"/>
     <!-- Custom Style-->
     <link href="{{ asset('assets/css/app-style.css') }}" rel="stylesheet"/>
+    <!-- Text editor-->
+    <link href="{{ asset('assets/plugins/summernote/dist/summernote-bs4.css') }}" rel="stylesheet"/>
     <!--SweetAlert 2-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <!--====== AJAX ======-->
@@ -30,7 +32,7 @@
     @stack('head')
 </head>
 
-<body onload="info_noti()">
+<body onload="">
 
 <!--Start logout-->
 @include('includes.logout')
@@ -40,11 +42,11 @@
  <div id="wrapper">
 
     <!--Start sidebar-wrapper-->
-    @include('staff.layout.sidebar')
+    @include('company.layout.sidebar')
     <!--End sidebar-wrapper-->
 
     <!--Start topbar header-->
-    @include('staff.layout.topbar')
+    @include('company.layout.topbar')
     <!--End topbar header-->
 
     <div class="clearfix">
@@ -59,7 +61,7 @@
     <!--End Back To Top Button-->
 
 	<!--Start footer-->
-	@include('staff.layout.footer')
+	@include('company.layout.footer')
 	<!--End footer-->
   </div>
 <!--End wrapper-->

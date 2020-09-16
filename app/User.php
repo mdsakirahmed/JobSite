@@ -17,6 +17,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'isCompany',
+        'image',
         'first_name',
         'last_name',
         'business_name',
@@ -42,9 +43,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-
     //Skill
     public function skill(){
         return $this->hasMany(Skill::class,'applicant_id','id');
+    }
+
+    //Job
+    public function jobs(){
+        return $this->hasMany(Job::class,'company_id','id');
     }
 }

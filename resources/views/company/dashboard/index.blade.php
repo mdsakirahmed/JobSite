@@ -1,4 +1,5 @@
-@extends('staff.layout.app')
+@extends('company.layout.app')
+    @push('title') Dashboard @endpush
     @push('head')
     <!-- notifications css -->
     <link rel="stylesheet" href="{{ asset('assets/plugins/notifications/css/lobibox.min.css') }}"/>
@@ -68,31 +69,47 @@
         </div><!--End Row-->
 
         <div class="row">
-            <div class="col-12 col-lg-7 col-xl-7">
+            <div class="col-12 col-lg-6 col-xl-6">
                 <div class="card">
-                    <div class="card-header">
-                        Product Sales
-                        <div class="card-action">
-                            <div class="dropdown">
-                                <a href="javascript:void();" class="dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown">
-                                    <i class="icon-options"></i>
-                                </a>
-                                <div class="dropdown-menu animated fadeIn dropdown-menu-right">
-                                    <a class="dropdown-item" href="javascript:void();">Action</a>
-                                    <a class="dropdown-item" href="javascript:void();">Another action</a>
-                                    <a class="dropdown-item" href="javascript:void();">Something else here</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="javascript:void();">Separated link</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="card-body">
-                        <canvas id="dashboard-chart-1"></canvas>
+                        <h5 class="card-title">Primary Header</h5>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class="thead-primary shadow-primary">
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Job Title</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>Jacob</td>
+                                    <td>Thornton</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>Larry</td>
+                                    <td>the Bird</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">4</th>
+                                    <td>Larry</td>
+                                    <td>the Bird</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-lg-5 col-xl-5">
+            <div class="col-12 col-lg-6 col-xl-6">
                 <div class="card">
                     <div class="card-header">
                         Top Selling Categories

@@ -27,7 +27,7 @@ class userSeeder extends Seeder
         $applicant->isCompany   = 0;
         $applicant->first_name  = 'Ramim';
         $applicant->last_name   = 'Khan';
-        $applicant->resume      = 'default.pgf';
+        //$applicant->resume      = 'default.pgf';
         $applicant->email       = 'ramim@gmail.com';
         $applicant->password    = Hash::make('password');
         $applicant->save();

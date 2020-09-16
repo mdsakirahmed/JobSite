@@ -16,6 +16,7 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->boolean('isCompany')->default(0);
+            $table->string('image')->nullable();
             $table->string('first_name');
             $table->string('last_name');
             $table->string('business_name')->nullable()->comment('For company');

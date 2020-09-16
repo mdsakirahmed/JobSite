@@ -38,8 +38,8 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('applicant.home.index') }}">
-                                        My Skills
+                                    <a href="{{ asset('uploads/resumes/').'/'.auth()->user()->resume }}" target="_blank" class="resume-link">
+                                        Download resume
                                     </a>
                                 </li>
                             </ul>
@@ -48,12 +48,14 @@
                     <!-- Main Menu End-->
                     <div class="outer-box clearfix">
                         <!-- Search Btn -->
-                        <div class="search-box-btn search-box-outer" onclick="logout()">
-                            <span class="icon fa fa-sign-out"></span>
+                        <div class="search-box-btn search-box-outer " onclick="logout()">
+                            <span class="icon fa fa-sign-out bg-danger"></span>
                         </div>
                         <!-- Quote Btn -->
                         <div class="btn-box">
-                            <a href="#" class="quote-btn theme-btn profile-btn"> <img style="border-radius: 35px; border:white solid 2px" width="30px" src="{{ asset('uploads/images/default.png') }}" alt=""> {{ auth()->user()->first_name }}</a>
+                            <a href="#" class="quote-btn theme-btn profile-btn ">
+                                <img style="border-radius: 35px; border:white solid 2px" width="30px" class="user-image" src="{{ asset('uploads/images/'. auth()->user()->image) }}" alt="">
+                                {{ auth()->user()->first_name }}</a>
                         </div>
                     </div>
                 </div>

@@ -14,11 +14,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
 Route::get('/', function (){
     return redirect()->route('login');
 });
+
+Route::post('/registration', 'RegisterController@registration')->name('registration');
 
 /**
  * Routes for applicant
@@ -26,6 +28,7 @@ Route::get('/', function (){
 Route::group(['namespace' => 'Applicant', 'as' => 'applicant.', 'prefix'=>'', 'middleware'=>['applicant']], function (){
     Route::resource('home', 'HomeController');
     Route::resource('skill', 'SkillController');
+    Route::resource('profile', 'ProfileController');
 });
 
 /**
@@ -33,4 +36,5 @@ Route::group(['namespace' => 'Applicant', 'as' => 'applicant.', 'prefix'=>'', 'm
  */
 Route::group(['namespace' => 'Company', 'as' => 'company.', 'prefix'=>'', 'middleware'=>['company']], function (){
     Route::get('dashboard','DashboardController@index')->name('dashboard');
+    Route::resource('job', 'JobController');
 });

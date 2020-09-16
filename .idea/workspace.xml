@@ -131,16 +131,17 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/includes" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/company/job" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\laragon\www\JobSite\resources\views\company\job" />
+      <recent name="C:\laragon\www\JobSite\resources\views\includes" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\laragon\www\JobSite\resources\views\applicant\layouts" />
       <recent name="C:\laragon\www\JobSite\resources\views\frontend\job" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\laragon\www\JobSite\resources\views\includes" />
     </key>
   </component>
   <component name="RunManager">
@@ -158,7 +159,9 @@
       <option name="presentableId" value="Default" />
       <updated>1600103680426</updated>
       <workItem from="1600103681806" duration="4631000" />
-      <workItem from="1600140488929" duration="21031000" />
+      <workItem from="1600140488929" duration="46411000" />
+      <workItem from="1600226975825" duration="1000000" />
+      <workItem from="1600228020858" duration="1279000" />
     </task>
     <servers />
   </component>
@@ -166,17 +169,17 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="690" y="279" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1600105279321">
+    <state x="690" y="279" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1600193255833">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="690" y="279" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1050/-1366.305.1366.738@0.0.1920.1050" timestamp="1600105279321" />
+    <state x="690" y="279" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1050/-1366.305.1366.738@0.0.1920.1050" timestamp="1600193255833" />
     <state x="616" y="243" key="run.anything.popup" timestamp="1600106584243">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="616" y="243" key="run.anything.popup/0.0.1920.1050/-1366.305.1366.738@0.0.1920.1050" timestamp="1600106584243" />
-    <state x="623" y="227" width="672" height="678" key="search.everywhere.popup" timestamp="1600161156166">
+    <state x="623" y="227" width="672" height="678" key="search.everywhere.popup" timestamp="1600178212266">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="623" y="227" width="672" height="678" key="search.everywhere.popup/0.0.1920.1050/-1366.305.1366.738@0.0.1920.1050" timestamp="1600161156166" />
+    <state x="623" y="227" width="672" height="678" key="search.everywhere.popup/0.0.1920.1050/-1366.305.1366.738@0.0.1920.1050" timestamp="1600178212266" />
   </component>
 </project>
