@@ -31,12 +31,13 @@
                             <br>
                         </div>
                         <div class="lower-content">
-                            <div class="category btn apply-btn">
+                            <button @if(auth()->user()->checkApplication($job->id)) class="category btn bg-danger" disabled @else class="category btn apply-btn" @endif id="{{ $job->id }}">
                                 @if(auth()->user()->checkApplication($job->id))
                                 Applied at &nbsp; {{auth()->user()->checkApplication($job->id)->created_at->format('d/m/Y - h:i A')}}
-                                @else Apply Now
+                                @else
+                                    Apply Now
                                 @endif
-                            </div>
+                            </button>
                             <h4><a href="#"> {{ Illuminate\Support\Str::limit($job->title, 20) }} </a></h4>
                             <div class="text"> {!! Illuminate\Support\Str::limit($job->description, 50) !!} </div>
                             <div class="lower-box">
@@ -63,8 +64,6 @@
                     </div>
                 </div>
                 @endforeach
-
-
             </div>
         </div>
     </section>
@@ -72,6 +71,7 @@
     <script>
         //Add Image
         $('.apply-btn').click(function (){
+            var ID = this.id;
             $.ajax({
                 method: 'get',
                 url: "{{ route('applicant.profile.index') }}",
@@ -80,8 +80,49 @@
                 contentType: false,
                 success: function (data) {
                     if (data.resume){
-                        //working
+                       //Resume found
+                        var formData = new FormData();
+                        formData.append('resume', ID)
+                        $.ajax({
+                            method: 'POST',
+                            url: "{{ route('applicant.home.store') }}",
+                            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            success: function (data) {
+                                $('#'+ID).removeClass('apply-btn')
+                                $('#'+ID).addClass('bg-danger')
+                                $('#'+ID).prop( "disabled", true );
+                                $('#'+ID).html('Application send')
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: data.type,
+                                    title: data.message,
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                            },
+                            error: function (xhr) {
+                                var errorMessage = '<div class="card bg-danger">\n' +
+                                    '                        <div class="card-body text-center p-5">\n' +
+                                    '                            <span class="text-white">';
+                                $.each(xhr.responseJSON.errors, function(key,value) {
+                                    errorMessage +=(''+value+'<br>');
+                                });
+                                errorMessage +='</span>\n' +
+                                    '                        </div>\n' +
+                                    '                    </div>';
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    footer: errorMessage
+                                })
+                            },
+                        })
+
                     }else {
+                        //Resume not found
                         Swal.fire({
                             icon: 'error',
                             title: 'Resume...',
@@ -95,31 +136,9 @@
                         $('.user-detail').hide();
                         $('.add-skill-area').show();
                         $('.editable-area').show();
-                        getData();
                     }
                 },
             })
         });
-
-        getJobs();
-        //get all jobs
-        function getJobs(){
-            console.log('getJobs')
-            $.ajax({
-                method: 'get',
-                url: "{{ route('applicant.home.index') }}",
-                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                processData: false,
-                contentType: false,
-
-                success: function (data) {
-                    var jobs='';
-                    data.forEach(function(skill){
-                        jobs += '<span class="badge badge-pill badge-primary">'+ skill.name +'</span> &nbsp;';
-                    })
-                    $(".skills").html(jobs)
-                },
-            })
-        }
     </script>
 @endsection

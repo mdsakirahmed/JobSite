@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Applicant;
 
+use App\ApplicantHasApply;
 use App\Http\Controllers\Controller;
 use App\Job;
 use Illuminate\Http\Request;
@@ -37,7 +38,25 @@ class HomeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        request()->validate([
+            'resume'  => 'required|exists:jobs,id',
+        ]);
+
+        if (auth()->user()->checkApplication($request->input('resume'))){
+            return response()->json([
+                'type' => 'warning',
+                'message' => 'Already application submitted',
+            ]);
+        }
+        $application = new ApplicantHasApply();
+        $application->job_id        = $request->input('resume');
+        $application->applicant_id  = auth()->user()->id;
+        $application->save();
+
+        return response()->json([
+            'type' => 'success',
+            'message' => 'Successfully application submitted',
+        ]);
     }
 
     /**
