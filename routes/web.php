@@ -27,6 +27,7 @@ Route::post('/registration', 'RegisterController@registration')->name('registrat
  */
 Route::group(['namespace' => 'Applicant', 'as' => 'applicant.', 'prefix'=>'', 'middleware'=>['applicant']], function (){
     Route::resource('home', 'HomeController');
+    Route::post('/get-job', 'HomeController@getJobData')->name('getJobData');
     Route::resource('skill', 'SkillController');
     Route::resource('profile', 'ProfileController');
 });

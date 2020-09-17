@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true">
+<div class="modal fade" id="user-modal" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -7,9 +7,6 @@
                     <div class="user-title">
                         <img style="border-radius: 35px; border:white solid 2px" width="30px" class="user-image" src="{{ asset('uploads/images/'. auth()->user()->image) }}" alt="">
                         {{ auth()->user()->first_name }}
-                    </div>
-                    <div class="job-title">
-                        **Job titile
                     </div>
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -69,8 +66,6 @@
                             </div>
 
                     </form>
-                    <form method="" action="#" class="job-detail" novalidate="">
-                    </form>
                 </div>
             </div>
             <div class="modal-footer">
@@ -88,11 +83,10 @@
         //Show applicant register modal
         $('.profile-btn').click(function (){
             //alert('Working')
-            $('.job-title').hide();
-            $('.job-detail').hide();
             $('.add-skill-area').hide();
             $('.editable-area').hide();
-            $('.modal').modal('show');
+            $('#user-modal').modal('show');
+            $('#job-modal').modal('hide');
             $('.user-title').show();
             $('.user-detail').show();
             $('.user-detail').prop('disabled', true);
@@ -105,9 +99,8 @@
         //Editable modal
         $('#edit-profile-btn').click(function (){
             $(this).hide();
-            $('.job-title').hide();
-            $('.job-detail').hide();
-            $('.modal').modal('show');
+            $('#user-modal').modal('show');
+            $('#job-modal').modal('hide');
             $('.user-title').show();
             $('.user-detail').hide();
             $('.add-skill-area').show();

@@ -38,7 +38,7 @@
                                     Apply Now
                                 @endif
                             </button>
-                            <h4><a href="#"> {{ Illuminate\Support\Str::limit($job->title, 20) }} </a></h4>
+                            <h4><button class="show btn btn-outline-success"  value="{{ $job->id }}"> {{ Illuminate\Support\Str::limit($job->title, 20) }} </button></h4>
                             <div class="text"> {!! Illuminate\Support\Str::limit($job->description, 50) !!} </div>
                             <div class="lower-box">
                                 <div class="clearfix">
@@ -67,9 +67,10 @@
             </div>
         </div>
     </section>
+    @include('applicant.includes.job-detail')
     <!-- End Blog Section -->
     <script>
-        //Add Image
+        //Apply function
         $('.apply-btn').click(function (){
             var ID = this.id;
             $.ajax({

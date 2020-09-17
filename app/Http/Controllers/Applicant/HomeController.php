@@ -103,4 +103,16 @@ class HomeController extends Controller
     {
         //
     }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    //getJobData
+    public function getJobData(Request $request){
+        request()->validate([
+            'id'  => 'required|exists:jobs,id',
+        ]);
+        return Job::find($request->input('id'));
+    }
 }
