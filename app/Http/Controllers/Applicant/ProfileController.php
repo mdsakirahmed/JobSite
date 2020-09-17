@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Applicant;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Image;
 
 class ProfileController extends Controller
 {
@@ -46,26 +47,39 @@ class ProfileController extends Controller
                 'message' => 'Empty input field',
             ]);
         }
-        if ($request->file('image')) {
+
+
+        //Auto resize with 20 wide/ 20 height
+        if($request->hasFile('image')){
             request()->validate([
                 'image'  => 'image',
             ]);
-            $image = $request->file('image');
-            $destinationPath = public_path(). '/uploads/images/';
-            $imageName = 'image-'.auth()->user()->id.'-'.auth()->user()->first_name.'-'.$image->getClientOriginalName();
-            $request->file('image')->move($destinationPath, $imageName);
-            auth()->user()->image = $imageName;
+            $image              = $request->file('image');
+            $OriginalExtension  = $image->getClientOriginalExtension();
+            $image_name         =auth()->user()->id.'-'.auth()->user()->first_name.'-profile-'. Carbon::now()->format('d-m-Y H-i-s') .'.'. $OriginalExtension;
+            $destinationPath    = ('uploads/images');
+
+            $resize_image       = Image::make($image->getRealPath());
+
+            $resize_image->resize(500, 500, function($constraint){
+                $constraint->aspectRatio();
+            });
+
+            $resize_image->save($destinationPath . '/' . $image_name);
+            auth()->user()->image    = $image_name;
         }
+
 
         if ($request->file('resume')) {
             request()->validate([
                 'resume'  => 'mimes:doc,docx,pdf,max:5000',
             ]);
             $resume = $request->file('resume');
-            $destinationPath = public_path(). '/uploads/resumes/';
-            $resumeName = 'resume-'.auth()->user()->id.'-'.auth()->user()->first_name.'-'.$resume->getClientOriginalName();
-            $request->file('resume')->move($destinationPath, $resumeName);
-            auth()->user()->resume = $resumeName;
+            $OriginalExtension  = $resume->getClientOriginalExtension();
+            $resumeName         =auth()->user()->id.'-'.auth()->user()->first_name.'-resume-'. Carbon::now()->format('d-m-Y H-i-s') .'.'. $OriginalExtension;
+            $destinationPath = ('uploads/resumes');
+            $resume->move($destinationPath, $resumeName);
+            auth()->user()->resume    = $resumeName;
         }
         auth()->user()->save();
     }

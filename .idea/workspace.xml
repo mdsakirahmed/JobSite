@@ -121,6 +121,7 @@
       <path value="$PROJECT_DIR$/vendor/composer" />
       <path value="$PROJECT_DIR$/vendor/vlucas/phpdotenv" />
       <path value="$PROJECT_DIR$/vendor/theseer/tokenizer" />
+      <path value="$PROJECT_DIR$/vendor/intervention/image" />
     </include_path>
   </component>
   <component name="ProjectId" id="1hVkWNa5NmmUg0g2cVjWahyYFWZ" />
@@ -167,6 +168,7 @@
       <workItem from="1600279110600" duration="8555000" />
       <workItem from="1600317020137" duration="122000" />
       <workItem from="1600317158690" duration="11106000" />
+      <workItem from="1600339299985" duration="1444000" />
     </task>
     <servers />
   </component>
