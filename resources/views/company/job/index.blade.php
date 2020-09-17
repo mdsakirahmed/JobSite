@@ -37,6 +37,16 @@
                                     <footer class="blockquote-footer">{{ $job->created_at->format('d/m/Y - h:i A') }}</footer>
                                     <footer class="blockquote-footer">{{ $job->location }} | {{ $job->country }}</footer>
                                     <footer class="blockquote-footer info-outer"><b>{{ $job->salary }}</b></footer>
+                                    <hr>
+                                    <div class="col-12">
+                                        <a href="{{ route('company.job.show', $job->id) }}">
+                                            <div class="card gradient-forest">
+                                                <div class="card-body text-center p-5">
+                                                    <span class="text-white">Total application: {{ $job->applications()->count() }}</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
                                 </blockquote>
                             </div>
                         </div>

@@ -136,13 +136,13 @@
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\laragon\www\JobSite\resources\views\company\job" />
-      <recent name="C:\laragon\www\JobSite\resources\views\includes" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\laragon\www\JobSite\resources\views\applicant\layouts" />
       <recent name="C:\laragon\www\JobSite\resources\views\frontend\job" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\laragon\www\JobSite\resources\views\company\job" />
+      <recent name="C:\laragon\www\JobSite\resources\views\includes" />
     </key>
   </component>
   <component name="RunManager">
@@ -165,7 +165,7 @@
       <workItem from="1600228020858" duration="6865000" />
       <workItem from="1600279110600" duration="8555000" />
       <workItem from="1600317020137" duration="122000" />
-      <workItem from="1600317158690" duration="3902000" />
+      <workItem from="1600317158690" duration="6795000" />
     </task>
     <servers />
   </component>

@@ -44,7 +44,7 @@ class User extends Authenticatable
     ];
 
     //Skill
-    public function skill(){
+    public function skills(){
         return $this->hasMany(Skill::class,'applicant_id','id');
     }
 
@@ -61,7 +61,7 @@ class User extends Authenticatable
     }
 
     //Application
-    public function application($id){
+    public function application(){
         return $this->hasMany(ApplicantHasApply::class,'applicant_id','id')->orderBy('id', 'desc');
     }
 }

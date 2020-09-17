@@ -10,8 +10,8 @@
         <div class="auto-container">
             <h2>#jObSite</h2>
             <ul class="page-breadcrumb">
-                <li><a href="#">home</a></li>
-                <li>Latest News</li>
+                <li><a href="#">Welcome to job site </a></li>
+                <li>{{ auth()->user()->first_name .' '. auth()->user()->last_name  }}</li>
             </ul>
         </div>
     </section>

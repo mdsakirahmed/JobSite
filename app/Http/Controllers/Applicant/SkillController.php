@@ -18,7 +18,7 @@ class SkillController extends Controller
     public function index(Request $request)
     {
         if($request->ajax()){
-            return auth()->user()->skill;
+            return auth()->user()->skills;
         }else{
             return redirect()->back();
         }
